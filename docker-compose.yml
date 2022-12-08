@@ -1,0 +1,21 @@
+version: "1.0"
+
+services:
+  db:
+    container_name: mysql_db
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    platform: linux/x86_64
+    ports:
+      - 3306:3306
+    env_file:
+      - ./mysql/.env
+    volumes:
+      - type: volume
+        source: mysql_test
+        target: /var/lib/mysql
+
+volumes:
+  mysql_test:
+    name: mysql_test
